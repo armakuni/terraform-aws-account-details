@@ -1,0 +1,35 @@
+name: Run Tests
+
+on:
+  workflow_call:
+    secrets:
+      aws-account-id:
+        required: true
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to AWS
+        uses: armakuni/github-actions/assume-aws-oidc-role@v0.6.1
+        with:
+          aws-account-id: ${{ secrets.aws-account-id }}
+          aws-region: eu-west-3
+
+      - uses: actions/setup-go@v1
+        with:
+          go-version: 1.21.0
+
+      - name: Download Go modules
+        run: go mod download
+        working-directory: test
+
+      - name: Run Terratest (via Go)
+        run: go test ./... -timeout 5m
+        working-directory: test

@@ -1,0 +1,23 @@
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+
+jobs:
+  run-tests:
+    # This can only be run on main because that's the only branch that has AWS permissions
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/run-tests.yml
+    secrets:
+      aws-account-id: ${{ secrets.ARMAKUNI_AWS_PROD_ACCOUNT_ID }}
+
+  check-conventional-commits:
+    uses: armakuni/github-actions/.github/workflows/check-conventional-commits.yml@v0.2.3
+
+  create-release:
+    needs:
+    - check-conventional-commits
+    - run-tests
+    if: github.ref == 'refs/heads/main'
+    uses: armakuni/github-actions/.github/workflows/tag-and-release.yml@v0.4.1
+    secrets: inherit
