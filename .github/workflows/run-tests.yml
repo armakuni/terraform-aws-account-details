@@ -22,7 +22,7 @@ jobs:
           aws-account-id: ${{ secrets.aws-account-id }}
           aws-region: eu-west-3
 
-      - uses: actions/setup-go@v1
+      - uses: actions/setup-go@v4
         with:
           go-version: 1.21.0
 
