@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.1.2](https://github.com/armakuni/terraform-aws-account-details/compare/v0.1.1..v0.1.2) - 2023-09-25
+#### Bug Fixes
+- Ensure artifacts are download for terraform docs - ([22a555e](https://github.com/armakuni/terraform-aws-account-details/commit/22a555e9e6b0087dc1a64c0f24fca0f715dcd6be)) - Tom Oram
+
+- - -
+
 ## [v0.1.1](https://github.com/armakuni/terraform-aws-account-details/compare/v0.1.0..v0.1.1) - 2023-09-25
 #### Bug Fixes
 - Add auto-generation of the terraform documentation - ([da98193](https://github.com/armakuni/terraform-aws-account-details/commit/da9819348b3dd2fc8ad3c991f30739e0a9dacbeb)) - Tom Oram
