@@ -11,6 +11,9 @@ jobs:
     secrets:
       aws-account-id: ${{ secrets.ARMAKUNI_AWS_PROD_ACCOUNT_ID }}
 
+  lint-pipeline:
+    uses: armakuni/github-actions/.github/workflows/lint-pipeline.yml@v0.10.4
+
   check-conventional-commits:
     uses: armakuni/github-actions/.github/workflows/check-conventional-commits.yml@v0.10.1
 
@@ -24,6 +27,7 @@ jobs:
 
   create-release:
     needs:
+    - lint-pipeline
     - check-conventional-commits
     - run-tests
     - generate-terraform-docs
